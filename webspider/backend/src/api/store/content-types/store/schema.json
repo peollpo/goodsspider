@@ -1,0 +1,40 @@
+﻿{
+    "kind":  "collectionType",
+    "collectionName":  "stores",
+    "info":  {
+                 "singularName":  "store",
+                 "pluralName":  "stores",
+                 "displayName":  "店铺",
+                 "description":  "小红书店铺信息"
+             },
+    "options":  {
+                    "draftAndPublish":  false
+                },
+    "attributes":  {
+                       "name":  {
+                                    "type":  "string",
+                                    "required":  true
+                                },
+                       "externalId":  {
+                                          "type":  "string",
+                                          "required":  true,
+                                          "unique":  true
+                                      },
+                       "followers":  {
+                                         "type":  "biginteger",
+                                         "default":  0
+                                     },
+                       "logoUrl":  {
+                                       "type":  "string"
+                                   },
+                       "metadata":  {
+                                        "type":  "json"
+                                    },
+                       "products":  {
+                                        "type":  "relation",
+                                        "relation":  "oneToMany",
+                                        "target":  "api::product.product",
+                                        "mappedBy":  "store"
+                                    }
+                   }
+}

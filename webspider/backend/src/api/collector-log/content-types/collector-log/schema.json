@@ -1,0 +1,40 @@
+﻿{
+    "kind":  "collectionType",
+    "collectionName":  "collector_logs",
+    "info":  {
+                 "singularName":  "collector-log",
+                 "pluralName":  "collector-logs",
+                 "displayName":  "采集日志",
+                 "description":  "Worker采集日志记录"
+             },
+    "options":  {
+                    "draftAndPublish":  false
+                },
+    "attributes":  {
+                       "workerId":  {
+                                        "type":  "string"
+                                    },
+                       "level":  {
+                                     "type":  "enumeration",
+                                     "enum":  [
+                                                  "debug",
+                                                  "info",
+                                                  "warning",
+                                                  "error"
+                                              ],
+                                     "default":  "info"
+                                 },
+                       "message":  {
+                                       "type":  "text",
+                                       "required":  true
+                                   },
+                       "details":  {
+                                       "type":  "json"
+                                   },
+                       "task":  {
+                                    "type":  "relation",
+                                    "relation":  "manyToOne",
+                                    "target":  "api::crawl-task.crawl-task"
+                                }
+                   }
+}

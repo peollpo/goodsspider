@@ -1,0 +1,53 @@
+﻿{
+    "kind":  "collectionType",
+    "collectionName":  "products",
+    "info":  {
+                 "singularName":  "product",
+                 "pluralName":  "products",
+                 "displayName":  "商品",
+                 "description":  "小红书商品信息"
+             },
+    "options":  {
+                    "draftAndPublish":  false
+                },
+    "attributes":  {
+                       "title":  {
+                                     "type":  "string",
+                                     "required":  true
+                                 },
+                       "externalId":  {
+                                          "type":  "string",
+                                          "required":  true,
+                                          "unique":  true
+                                      },
+                       "price":  {
+                                     "type":  "decimal",
+                                     "default":  0
+                                 },
+                       "sales":  {
+                                     "type":  "integer",
+                                     "default":  0
+                                 },
+                       "coverUrl":  {
+                                        "type":  "string"
+                                    },
+                       "metadata":  {
+                                        "type":  "json"
+                                    },
+                       "lastCrawledAt":  {
+                                             "type":  "datetime"
+                                         },
+                       "store":  {
+                                     "type":  "relation",
+                                     "relation":  "manyToOne",
+                                     "target":  "api::store.store",
+                                     "inversedBy":  "products"
+                                 },
+                       "tasks":  {
+                                     "type":  "relation",
+                                     "relation":  "oneToMany",
+                                     "target":  "api::crawl-task.crawl-task",
+                                     "mappedBy":  "product"
+                                 }
+                   }
+}

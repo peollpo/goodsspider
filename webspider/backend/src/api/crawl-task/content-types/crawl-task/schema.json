@@ -1,0 +1,63 @@
+{
+    "kind": "collectionType",
+    "collectionName": "crawl_tasks",
+    "info": {
+        "singularName": "crawl-task",
+        "pluralName": "crawl-tasks",
+        "displayName": "采集任务",
+        "description": "商品采集任务管理"
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "attributes": {
+        "title": {
+            "type": "string",
+            "required": true
+        },
+        "url": {
+            "type": "string",
+            "required": true
+        },
+        "priority": {
+            "type": "integer",
+            "default": 5
+        },
+        "payload": {
+            "type": "json"
+        },
+        "result": {
+            "type": "json"
+        },
+        "errorMessage": {
+            "type": "text"
+        },
+        "lockedAt": {
+            "type": "datetime"
+        },
+        "completedAt": {
+            "type": "datetime"
+        },
+        "workerId": {
+            "type": "string"
+        },
+        "attempts": {
+            "type": "integer",
+            "default": 0
+        },
+        "scheduledAt": {
+            "type": "datetime"
+        },
+        "product": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::product.product",
+            "inversedBy": "tasks"
+        },
+        "state": {
+            "type": "string",
+            "default": "pending",
+            "required": true
+        }
+    }
+}

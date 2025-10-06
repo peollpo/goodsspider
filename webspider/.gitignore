@@ -1,0 +1,18 @@
+﻿# Node
+node_modules/
+.npm/
+
+# Strapi build artifacts
+backend/.cache/
+backend/build/
+backend/.tmp/
+backend/logs/
+
+# Environment
+backend/.env.local
+backend/.env.*.local
+backend/tmp/
+
+# OS files
+.DS_Store
+Thumbs.db
