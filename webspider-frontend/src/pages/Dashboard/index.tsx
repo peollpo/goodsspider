@@ -40,8 +40,8 @@ const Dashboard: React.FC = () => {
   }, []);
 
   return (
-    <div>
-      <h2>数据概览</h2>
+    <div style={{ width: '100%' }}>
+      <h2 style={{ marginBottom: 24, fontSize: 20, fontWeight: 600 }}>数据概览</h2>
       <Spin spinning={loading}>
         <Row gutter={16}>
           <Col span={6}>
@@ -89,7 +89,7 @@ const Dashboard: React.FC = () => {
         {/* 销量趋势图 */}
         <Row gutter={16} style={{ marginTop: 16 }}>
           <Col span={24}>
-            <Card>
+            <Card title="销量趋势">
               {trendData.length > 0 ? (
                 <SalesTrendChart data={trendData} />
               ) : (

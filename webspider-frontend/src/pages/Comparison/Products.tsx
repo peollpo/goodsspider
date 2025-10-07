@@ -76,8 +76,8 @@ const ProductComparisonPage: React.FC = () => {
   ];
 
   return (
-    <div>
-      <h2>商品销量对比</h2>
+    <div style={{ width: '100%' }}>
+      <h2 style={{ marginBottom: 24, fontSize: 20, fontWeight: 600 }}>商品销量对比</h2>
       <Space style={{ marginBottom: 16 }}>
         <Button icon={<ReloadOutlined />} onClick={fetchData}>刷新</Button>
         <Button icon={<DownloadOutlined />} onClick={handleExport}>导出Excel</Button>
