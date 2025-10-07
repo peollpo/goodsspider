@@ -3,12 +3,15 @@ import { StrapiResponse, Product, PaginationParams } from '../types';
 
 // 获取商品列表
 export const getProducts = (params?: PaginationParams): Promise<StrapiResponse<Product[]>> => {
-  return api.get('/products', {
-    params: {
-      ...params,
-      populate: 'store'
-    }
-  });
+  // Strapi 5 需要嵌套的分页参数格式
+  const strapiParams: any = { populate: 'store' };
+  if (params?.pageSize) {
+    strapiParams.pagination = { pageSize: params.pageSize };
+  }
+  if (params?.sort) {
+    strapiParams.sort = params.sort;
+  }
+  return api.get('/products', { params: strapiParams });
 };
 
 // 获取单个商品

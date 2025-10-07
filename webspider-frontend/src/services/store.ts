@@ -3,7 +3,15 @@ import { StrapiResponse, Store, PaginationParams } from '../types';
 
 // 获取店铺列表
 export const getStores = (params?: PaginationParams): Promise<StrapiResponse<Store[]>> => {
-  return api.get('/stores', { params });
+  // Strapi 5 需要嵌套的分页参数格式
+  const strapiParams: any = {};
+  if (params?.pageSize) {
+    strapiParams.pagination = { pageSize: params.pageSize };
+  }
+  if (params?.sort) {
+    strapiParams.sort = params.sort;
+  }
+  return api.get('/stores', { params: strapiParams });
 };
 
 // 获取单个店铺
