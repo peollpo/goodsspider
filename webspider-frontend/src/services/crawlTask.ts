@@ -3,7 +3,11 @@ import { StrapiResponse, CrawlTask, PaginationParams } from '../types';
 
 // 获取采集任务列表
 export const getCrawlTasks = (params?: PaginationParams): Promise<StrapiResponse<CrawlTask[]>> => {
-  return api.get('/crawl-tasks', { params });
+  // Strapi 5 需要嵌套的分页参数格式
+  const strapiParams = params?.pageSize
+    ? { pagination: { pageSize: params.pageSize } }
+    : undefined;
+  return api.get('/crawl-tasks', { params: strapiParams });
 };
 
 // 获取单个采集任务
