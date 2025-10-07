@@ -37,6 +37,32 @@
                        "lastCrawledAt":  {
                                              "type":  "datetime"
                                          },
+                       "firstCollectTime": {
+                           "type": "datetime"
+                       },
+                       "firstSales": {
+                           "type": "integer",
+                           "default": 0
+                       },
+                       "latestCollectTime": {
+                           "type": "datetime"
+                       },
+                       "latestSales": {
+                           "type": "integer",
+                           "default": 0
+                       },
+                       "daysDiff": {
+                           "type": "integer",
+                           "default": 0
+                       },
+                       "salesGrowth": {
+                           "type": "integer",
+                           "default": 0
+                       },
+                       "avgDailySales": {
+                           "type": "decimal",
+                           "default": 0
+                       },
                        "store":  {
                                      "type":  "relation",
                                      "relation":  "manyToOne",

@@ -1,0 +1,57 @@
+{
+    "kind": "collectionType",
+    "collectionName": "product_histories",
+    "info": {
+        "singularName": "product-history",
+        "pluralName": "product-histories",
+        "displayName": "商品历史记录",
+        "description": "每次采集的商品原始数据记录"
+    },
+    "options": {
+        "draftAndPublish": false
+    },
+    "attributes": {
+        "productId": {
+            "type": "string",
+            "required": true
+        },
+        "title": {
+            "type": "string"
+        },
+        "sellerName": {
+            "type": "string"
+        },
+        "totalSales": {
+            "type": "integer",
+            "default": 0
+        },
+        "price": {
+            "type": "decimal",
+            "default": 0
+        },
+        "sales": {
+            "type": "integer",
+            "default": 0
+        },
+        "collectTime": {
+            "type": "datetime",
+            "required": true
+        },
+        "productUrl": {
+            "type": "string"
+        },
+        "accountUrl": {
+            "type": "string"
+        },
+        "crawlTask": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::crawl-task.crawl-task"
+        },
+        "product": {
+            "type": "relation",
+            "relation": "manyToOne",
+            "target": "api::product.product"
+        }
+    }
+}

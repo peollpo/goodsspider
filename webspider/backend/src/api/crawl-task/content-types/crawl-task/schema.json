@@ -16,7 +16,7 @@
             "required": true
         },
         "url": {
-            "type": "string",
+            "type": "text",
             "required": true
         },
         "priority": {

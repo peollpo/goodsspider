@@ -30,6 +30,32 @@
                        "metadata":  {
                                         "type":  "json"
                                     },
+                       "firstCollectTime": {
+                           "type": "datetime"
+                       },
+                       "firstTotalSales": {
+                           "type": "integer",
+                           "default": 0
+                       },
+                       "latestCollectTime": {
+                           "type": "datetime"
+                       },
+                       "latestTotalSales": {
+                           "type": "integer",
+                           "default": 0
+                       },
+                       "daysDiff": {
+                           "type": "integer",
+                           "default": 0
+                       },
+                       "salesGrowth": {
+                           "type": "integer",
+                           "default": 0
+                       },
+                       "avgDailySales": {
+                           "type": "decimal",
+                           "default": 0
+                       },
                        "products":  {
                                         "type":  "relation",
                                         "relation":  "oneToMany",

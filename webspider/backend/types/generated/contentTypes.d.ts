@@ -503,8 +503,51 @@ export interface ApiCrawlTaskCrawlTask extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    url: Schema.Attribute.String & Schema.Attribute.Required;
+    url: Schema.Attribute.Text & Schema.Attribute.Required;
     workerId: Schema.Attribute.String;
+  };
+}
+
+export interface ApiProductHistoryProductHistory
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'product_histories';
+  info: {
+    description: '\u6BCF\u6B21\u91C7\u96C6\u7684\u5546\u54C1\u539F\u59CB\u6570\u636E\u8BB0\u5F55';
+    displayName: '\u5546\u54C1\u5386\u53F2\u8BB0\u5F55';
+    pluralName: 'product-histories';
+    singularName: 'product-history';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    accountUrl: Schema.Attribute.String;
+    collectTime: Schema.Attribute.DateTime & Schema.Attribute.Required;
+    crawlTask: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::crawl-task.crawl-task'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product-history.product-history'
+    > &
+      Schema.Attribute.Private;
+    price: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
+    product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
+    productId: Schema.Attribute.String & Schema.Attribute.Required;
+    productUrl: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    sales: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    sellerName: Schema.Attribute.String;
+    title: Schema.Attribute.String;
+    totalSales: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -520,14 +563,20 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    avgDailySales: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
     coverUrl: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    daysDiff: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     externalId: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
+    firstCollectTime: Schema.Attribute.DateTime;
+    firstSales: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     lastCrawledAt: Schema.Attribute.DateTime;
+    latestCollectTime: Schema.Attribute.DateTime;
+    latestSales: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -538,6 +587,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     price: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
     publishedAt: Schema.Attribute.DateTime;
     sales: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    salesGrowth: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     store: Schema.Attribute.Relation<'manyToOne', 'api::store.store'>;
     tasks: Schema.Attribute.Relation<'oneToMany', 'api::crawl-task.crawl-task'>;
     title: Schema.Attribute.String & Schema.Attribute.Required;
@@ -559,13 +609,19 @@ export interface ApiStoreStore extends Struct.CollectionTypeSchema {
     draftAndPublish: false;
   };
   attributes: {
+    avgDailySales: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    daysDiff: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     externalId: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
+    firstCollectTime: Schema.Attribute.DateTime;
+    firstTotalSales: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     followers: Schema.Attribute.BigInteger & Schema.Attribute.DefaultTo<0>;
+    latestCollectTime: Schema.Attribute.DateTime;
+    latestTotalSales: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::store.store'> &
       Schema.Attribute.Private;
@@ -574,6 +630,7 @@ export interface ApiStoreStore extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String & Schema.Attribute.Required;
     products: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
+    salesGrowth: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1092,6 +1149,7 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::collector-log.collector-log': ApiCollectorLogCollectorLog;
       'api::crawl-task.crawl-task': ApiCrawlTaskCrawlTask;
+      'api::product-history.product-history': ApiProductHistoryProductHistory;
       'api::product.product': ApiProductProduct;
       'api::store.store': ApiStoreStore;
       'plugin::content-releases.release': PluginContentReleasesRelease;
