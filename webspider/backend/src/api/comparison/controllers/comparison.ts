@@ -5,7 +5,7 @@ export default {
    */
   async productComparison(ctx) {
     try {
-      const strapi = ctx.strapi;
+      // Strapi 5 使用全局strapi变量,不能用ctx.strapi
 
       // 获取所有商品
       const products = await strapi.entityService.findMany('api::product.product', {
@@ -77,7 +77,7 @@ export default {
    */
   async storeComparison(ctx) {
     try {
-      const strapi = ctx.strapi;
+      // Strapi 5 使用全局strapi变量,不能用ctx.strapi
 
       // 获取所有店铺
       const stores = await strapi.entityService.findMany('api::store.store', {
