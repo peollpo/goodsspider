@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { Table, Button, Space, Tag, Modal, Form, Input, InputNumber, message, Popconfirm } from 'antd';
-import { PlusOutlined, ReloadOutlined, DeleteOutlined, DownloadOutlined } from '@ant-design/icons';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Table, Button, Space, Tag, Modal, Form, Input, InputNumber, message, Popconfirm, Switch } from 'antd';
+import { PlusOutlined, ReloadOutlined, DeleteOutlined, DownloadOutlined, SyncOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import { CrawlTask } from '../../types';
 import { getCrawlTasks, createCrawlTask, deleteCrawlTask } from '../../services/crawlTask';
 import { formatDate, exportToExcel } from '../../utils/format';
+import { useAutoRefresh } from '../../hooks/useAutoRefresh';
 
 const { TextArea } = Input;
 
@@ -14,7 +15,7 @@ const CrawlTasks: React.FC = () => {
   const [modalVisible, setModalVisible] = useState(false);
   const [form] = Form.useForm();
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setLoading(true);
     try {
       const response = await getCrawlTasks({ pageSize: 100 });
@@ -24,11 +25,16 @@ const CrawlTasks: React.FC = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  const { isAutoRefreshEnabled, toggleAutoRefresh, countdown } = useAutoRefresh(fetchData, {
+    interval: 10000,
+    enabled: false,
+  });
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const handleCreate = async (values: any) => {
     try {
@@ -103,6 +109,15 @@ const CrawlTasks: React.FC = () => {
         </Button>
         <Button icon={<ReloadOutlined />} onClick={fetchData}>刷新</Button>
         <Button icon={<DownloadOutlined />} onClick={handleExport}>导出Excel</Button>
+        <Space>
+          <Switch
+            checked={isAutoRefreshEnabled}
+            onChange={toggleAutoRefresh}
+            checkedChildren={<SyncOutlined spin />}
+            unCheckedChildren="自动刷新"
+          />
+          {isAutoRefreshEnabled && <span style={{ color: '#999' }}>({countdown}秒后刷新)</span>}
+        </Space>
       </Space>
 
       <Table
