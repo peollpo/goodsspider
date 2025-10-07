@@ -5,8 +5,6 @@ export default {
    */
   async getStatistics(ctx) {
     try {
-      const strapi = ctx.strapi;
-
       // 1. 获取商品总数
       const productCount = await strapi.db.query('api::product.product').count();
 
@@ -56,8 +54,6 @@ export default {
    */
   async getSalesTrend(ctx) {
     try {
-      const strapi = ctx.strapi;
-
       // 获取所有历史记录，按采集时间排序
       const histories = await strapi.db.query('api::product-history.product-history').findMany({
         orderBy: { collectTime: 'asc' },
