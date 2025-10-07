@@ -43,8 +43,8 @@ const StoreComparisonPage: React.FC = () => {
     { title: '店铺名称', dataIndex: 'storeName', width: 200, fixed: 'left' },
     { title: '上次采集时间', dataIndex: 'previousTime', width: 180, render: (v) => formatDate(v, 'YYYY-MM-DD HH:mm') },
     { title: '最新采集时间', dataIndex: 'latestTime', width: 180, render: (v) => formatDate(v, 'YYYY-MM-DD HH:mm') },
-    { title: '上次采集总销量', dataIndex: 'previousTotalSales', width: 140, render: formatNumber },
-    { title: '最新采集总销量', dataIndex: 'latestTotalSales', width: 140, render: formatNumber },
+    { title: '上次采集总销量', dataIndex: 'previousTotalSales', width: 140, render: (val) => formatNumber(val) },
+    { title: '最新采集总销量', dataIndex: 'latestTotalSales', width: 140, render: (val) => formatNumber(val) },
     {
       title: '销量差值',
       dataIndex: 'salesDiff',

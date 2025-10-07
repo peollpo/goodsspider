@@ -47,7 +47,7 @@ const ProductComparisonPage: React.FC = () => {
     { title: '商品ID', dataIndex: 'productId', width: 180, ellipsis: true, fixed: 'left' },
     { title: '商品标题', dataIndex: 'title', width: 200, ellipsis: true },
     { title: '店铺名称', dataIndex: 'sellerName', width: 150 },
-    { title: '价格', dataIndex: 'price', width: 100, render: formatCurrency },
+    { title: '价格', dataIndex: 'price', width: 100, render: (val) => formatCurrency(val) },
     {
       title: '商品链接',
       dataIndex: 'productUrl',
@@ -58,8 +58,8 @@ const ProductComparisonPage: React.FC = () => {
         </a>
       ),
     },
-    { title: '上次采集销量', dataIndex: 'previousSales', width: 120, render: formatNumber },
-    { title: '最新采集销量', dataIndex: 'latestSales', width: 120, render: formatNumber },
+    { title: '上次采集销量', dataIndex: 'previousSales', width: 120, render: (val) => formatNumber(val) },
+    { title: '最新采集销量', dataIndex: 'latestSales', width: 120, render: (val) => formatNumber(val) },
     { title: '上次采集时间', dataIndex: 'previousTime', width: 160, render: (v) => formatDate(v, 'YYYY-MM-DD HH:mm') },
     { title: '最新采集时间', dataIndex: 'latestTime', width: 160, render: (v) => formatDate(v, 'YYYY-MM-DD HH:mm') },
     {

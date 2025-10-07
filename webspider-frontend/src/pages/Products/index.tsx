@@ -60,12 +60,12 @@ const Products: React.FC = () => {
   const columns: ColumnsType<Product> = [
     { title: '商品标题', dataIndex: 'title', width: 200, ellipsis: true, fixed: 'left' },
     { title: '商品ID', dataIndex: 'externalId', width: 180, ellipsis: true },
-    { title: '价格', dataIndex: 'price', width: 100, render: formatCurrency },
+    { title: '价格', dataIndex: 'price', width: 100, render: (val) => formatCurrency(val) },
     { title: '店铺名称', dataIndex: ['store', 'name'], width: 150, ellipsis: true },
     { title: '首次采集时间', dataIndex: 'firstCollectTime', width: 160, render: (v) => formatDate(v, 'YYYY-MM-DD') },
-    { title: '首次采集销量', dataIndex: 'firstSales', width: 120, render: formatNumber },
+    { title: '首次采集销量', dataIndex: 'firstSales', width: 120, render: (val) => formatNumber(val) },
     { title: '最新采集时间', dataIndex: 'latestCollectTime', width: 160, render: (v) => formatDate(v, 'YYYY-MM-DD') },
-    { title: '最新采集销量', dataIndex: 'latestSales', width: 120, render: formatNumber },
+    { title: '最新采集销量', dataIndex: 'latestSales', width: 120, render: (val) => formatNumber(val) },
     { title: '采集天数差', dataIndex: 'daysDiff', width: 100, render: (v) => `${v || 0}天` },
     {
       title: '销量增长',

@@ -59,11 +59,11 @@ const Stores: React.FC = () => {
   const columns: ColumnsType<Store> = [
     { title: '店铺名称', dataIndex: 'name', width: 200, fixed: 'left' },
     { title: '店铺ID', dataIndex: 'externalId', width: 180, ellipsis: true },
-    { title: '粉丝数', dataIndex: 'followers', width: 120, render: formatNumber },
+    { title: '粉丝数', dataIndex: 'followers', width: 120, render: (val) => formatNumber(val) },
     { title: '首次采集时间', dataIndex: 'firstCollectTime', width: 160, render: (v) => formatDate(v, 'YYYY-MM-DD') },
-    { title: '首次采集总销量', dataIndex: 'firstTotalSales', width: 140, render: formatNumber },
+    { title: '首次采集总销量', dataIndex: 'firstTotalSales', width: 140, render: (val) => formatNumber(val) },
     { title: '最新采集时间', dataIndex: 'latestCollectTime', width: 160, render: (v) => formatDate(v, 'YYYY-MM-DD') },
-    { title: '最新采集总销量', dataIndex: 'latestTotalSales', width: 140, render: formatNumber },
+    { title: '最新采集总销量', dataIndex: 'latestTotalSales', width: 140, render: (val) => formatNumber(val) },
     { title: '采集天数差', dataIndex: 'daysDiff', width: 100, render: (v) => `${v || 0}天` },
     {
       title: '销量增长',

@@ -88,8 +88,8 @@ const CrawlTasks: React.FC = () => {
       },
     },
     { title: '优先级', dataIndex: 'priority', width: 80 },
-    { title: '创建时间', dataIndex: 'createdAt', width: 180, render: formatDate },
-    { title: '完成时间', dataIndex: 'completedAt', width: 180, render: formatDate },
+    { title: '创建时间', dataIndex: 'createdAt', width: 180, render: (date) => formatDate(date) },
+    { title: '完成时间', dataIndex: 'completedAt', width: 180, render: (date) => formatDate(date) },
     {
       title: '操作',
       width: 100,
