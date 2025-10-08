@@ -53,7 +53,7 @@ export interface Store {
   documentId: string;
   name: string;
   externalId: string;
-  followers: number;
+  followers: number | string;
   logoUrl?: string;
   firstCollectTime?: string;
   firstTotalSales?: number;
@@ -62,6 +62,7 @@ export interface Store {
   daysDiff?: number;
   salesGrowth?: number;
   avgDailySales?: number;
+  metadata?: Record<string, unknown>;
   createdAt: string;
   updatedAt: string;
 }

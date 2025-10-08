@@ -2,9 +2,26 @@ import axios from 'axios';
 import { message } from 'antd';
 import { getToken, clearAuth } from '../utils/storage';
 
+const DEFAULT_API_BASE = 'http://localhost:1337/api';
+
+const resolveBaseURL = () => {
+  const envUrl = import.meta.env.VITE_API_BASE_URL?.trim();
+
+  if (envUrl) {
+    return envUrl.endsWith('/') ? envUrl.slice(0, -1) : envUrl;
+  }
+
+  if (typeof window !== 'undefined') {
+    const origin = window.location.origin.replace(/\/$/, '');
+    return `${origin}/api`;
+  }
+
+  return DEFAULT_API_BASE;
+};
+
 // 创建axios实例
 const api = axios.create({
-  baseURL: 'http://localhost:1337/api',
+  baseURL: resolveBaseURL(),
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
